@@ -1,0 +1,175 @@
+{%extends 'base.html'%}
+{%load static %}
+
+
+{%block content%}
+{% include 'header.html'%}
+
+<style>
+    .product-img{
+        overflow:hidden;
+        border: 1px solid black;
+        height:250px;
+        width: 240px;
+    }
+   .product-img img{
+    width:100%;
+    height:100%;
+   }
+   .product-img img:hover{
+    transform:scale(1.2);
+   }
+</style>
+
+
+<div class="intro-section custom-owl-carousel" id="home-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-5 mr-auto">
+
+                <div class="owl-carousel slide-one-item-alt-text">
+                    <div class="slide-text">
+                        <h1>Appealingly designed Shoes</h1>
+                        <p class="mb-5">Their quality, style, appealingness and perfection are unmatchable!</p>
+                        <p><a href="/products"   style="background-color: #113; color: white; border: 1px solid brown;" class="btn btn-outline-light py-3 px-5">Start Shopping</a></p>
+                    </div>
+                    <div class="slide-text">
+                        <h1>Welcome to lodeShoes</h1>
+                        <p class="mb-5">You have come at the right place to get the right shoe for your beautiful feet!</p>
+                        <p><a href="/products"   style="background-color: #113; color: white; border: 1px solid brown;" class="btn btn-outline-light py-3 px-5">Start Shopping</a></p>
+                    </div>
+                    <div class="slide-text">
+                        <h1>100% hand-made</h1>
+                        <p class="mb-5">They are made manually, in a way allowing them to last long!</p>
+                        <p><a href="/products"   style="background-color: #113; color: white; border: 1px solid brown;" class="btn btn-outline-light py-3 px-5">Start Shopping</a></p>
+                    </div>
+                    <div class="slide-text">
+                        <h1>We make your feet smile</h1>
+                        <p class="mb-5">Made to give you comfort and permits to walk around freely! Lodeshoes matches your feet size and are health friendly!</p>
+                        <p><a href="/products"   style="background-color: #113; color: white; border: 1px solid brown;" class="btn btn-outline-light py-3 px-5">Start Shopping</a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 ml-auto">
+                <div class="owl-carousel slide-one-item-alt">
+                    <img src={%static 'images/img1.jpeg'%} alt="Image" class="img-fluid">
+                    <img src={%static 'images/logo.png'%} alt="Image" class="img-fluid">
+                    <img src={%static 'images/img2.jpeg'%} alt="Image" class="img-fluid">
+                    <img src={%static 'images/img6.jpeg'%} alt="Image" class="img-fluid">
+                </div>
+                <div class="owl-custom-direction">
+                    <a href="#" class="custom-prev"><i class="fas fa-chevron-left"></i></a>
+                    <a href="#" class="custom-next"><i class="fas fa-chevron-right"></i></span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Featured Start -->
+    <div class="container-fluid pt-5">
+        <div class="row px-xl-5 pb-3">
+            <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
+                <div class="d-flex align-items-center bg-dark mb-4" style="padding: 30px;">
+                    <h1 class="fa fa-check text-primary m-0 mr-3"></h1>
+                    <h5 class="font-weight-semi-bold m-0">Quality Product</h5>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
+                <div class="d-flex align-items-center bg-dark mb-4" style="padding: 30px;">
+                    <h1 class="fa fa-shipping-fast text-primary m-0 mr-2"></h1>
+                    <h5 class="font-weight-semi-bold m-0">On-Demand Shipping</h5>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
+                <div class="d-flex align-items-center bg-dark mb-4" style="padding: 20px;">
+                    <h1 class="fas fa-exchange-alt text-primary m-0 mr-3"></h1>
+                    <h5 class="font-weight-semi-bold m-0">3-Day Return</h5>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
+                <div class="d-flex align-items-center bg-dark mb-4" style="padding: 30px;">
+                    <h1 class="fa fa-phone-volume text-primary m-0 mr-3"></h1>
+                    <h5 class="font-weight-semi-bold m-0">24/7 Support</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Featured End -->
+
+    <!-- Products Start -->
+    <div class="container">
+        <h2 class="alert bg-primary p-3">Shop from our categories</h2>
+        <hr>
+        <div class="row px-xl-5">
+            {%for product in products %}
+            <div class="col-lg-3 col-md-4 col-sm-4 pb-1">
+                <div class="product-item bg-dark mb-4">
+                    <div class="product-img position-relative overflow-hidden">
+                        <a href="/products"><img class="img-fluid w-100" src={{product.image.url}} alt=""></a>
+                    </div>
+                    <div class="text-center py-4">
+                        <h5 class="ml-2"><a class="text-light"  href="">{{product.name}}</a></h5>
+                    </div>
+                </div>
+            </div>
+            
+            {% endfor%}
+        </div>
+    </div>
+    <!-- Products End -->
+
+<div class="container" >
+    <h2 class="alert bg-primary">What we do:</h2>
+    <hr>
+    <div class="row">
+    <div class="col-lg-4">
+        <br>
+        <p>We are a social enterprise that uses innovation to create environmentally sustainable footwear. Our Principles, the way we provide our services and our professional competence are what make us special.</p>
+    </div>
+    <div class="col-lg-6">
+        <br>
+        <p>For all people of all ages, we produce a wide variety of footwear goods. Our products are handcrafted to your preferences and renowned for their durability, comfort and healthfullness.</p>
+    </div>
+    </div>
+    <br>
+    <h2 class="alert bg-primary" style="margin-top: 50px;">Contact us:</h2>
+    <hr>
+    <div class="row">
+      <div class="col-sm-6">
+        {% include 'messages.html'%}
+    <form class="form-horizontal ml-5 row" method="post">
+        <br>
+        {% csrf_token %}
+        <div class="form-group col-sm-12">
+            <div class="">
+                <input type="text" class="form-control" name="name" 
+                    placeholder="Enter your name..." required>
+            </div>
+        </div>
+        <div class="form-group col-sm-12">
+            <div class="">
+                <input type="email" class="form-control" name="email" placeholder="Enter your e-mail..." required>
+            </div>
+        </div>
+        <div class="form-group col-sm-12">
+            <div class="">
+                    <textarea class="form-control" name="message" id="" cols="30" rows="5" placeholder="Your message here..." required></textarea>
+            </div>
+        </div>
+        <div class="form-group col-sm-10 ">
+            <div class="  ">
+                <button style="color: white;font-weight: 700; border: none;padding: 10px 20px;" type="submit" class="btn btn-outline-light py-3 px-5">Send Message</button>
+            </div>
+        </div>
+    </form>
+      </div>  
+    <iframe class="col-sm-6"
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15949.811842772095!2d30.086944614624088!3d-1.9730183318991676!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x19dca62d5ccf73a5%3A0x85be08f36aff91dd!2sKicukiro%2C%20Kigali!5e0!3m2!1sen!2srw!4v1662502505702!5m2!1sen!2srw"
+        width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+</div>
+<script src={%static 'js/jquery-1.4.1.min.js' %} type="text/javascript" ></script>
+    <script src={%static 'js/jquery.jcarousel.pack.js' %} type="text/javascript"></script>
+    <script src={%static "js/jquery-func.js" %} type="text/javascript"></script>
+{%endblock%}

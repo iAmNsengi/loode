@@ -1,0 +1,62 @@
+{%extends 'base.html'%}
+{%load static %}
+
+{%block content%}
+
+{%include 'header.html'%}
+
+<style>
+    body{
+        background: #113;
+    }
+</style>
+<div class="container">
+    <a href='/' class="btn btn-secondary">&backcong; Back To Home</a>
+  </div>
+<div class="container">
+
+<hr>
+    {%include 'messages.html'%}
+   
+<div class="d-inline-flex flex-wrap  ">
+{%for product in products%}
+ <div class="col-lg-3 col-md-4  col-sm-6 pb-1 flex-fill">
+                <div class="product-item bg-dark mb-4">
+                    <div class="product-img position-relative overflow-hidden" style="height:250px;">
+                        <a href="/products/{{product.id}}"><img style="width:100%;height:100%;"  class="img-fluid w-100" src={{product.image.url}} alt=""></a>2
+                    </div>
+                    <div class="text-center py-4" >
+                        <div class="d-flex align-items-center justify-content-center mb-1">
+                            <small class="fa fa-star text-primary mr-1"></small>
+                            <small class="fa fa-star text-primary mr-1"></small>
+                            <small class="fa fa-star text-primary mr-1"></small>
+                            <small class="fa fa-star text-primary mr-1"></small>
+                            <small class="fa fa-star text-primary mr-1"></small>
+                            <small class="text-light">({{product.category.name}})</small>
+                        </div>
+                         <div class="d-flex align-items-center justify-content-center mt-2">
+                            <h5>{{product.name}}</h5>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-center">
+                            <h5>{{product.price}} Frw</h5>
+                            {% if product.qty == 0 %}
+                            &nbsp;&nbsp;<small class="text-danger">OUT OF STOCK</small>
+                            {% else %}
+                            &nbsp;&nbsp;<small class="text-danger">{{product.qty}} Left</small>
+                            {% endif %}
+
+                        </div>
+                        {% if not request.user.is_staff %}
+                        <a style="border: 1px solid greenyellow;" href="/add-to-cart/{{product.id}}" class="btn btn-outline-light py-2 px-4 mr-2 mt-2">Add to Cart</a>
+                        {% endif %}
+            <a style="border: 1px solid brown;" class="btn btn-outline-light mt-2 py-2 px-4" href="products/{{product.id}}">View</a>
+                    </div>
+                </div>
+            </div>
+
+{% endfor %}
+</div>
+
+</div>
+
+{% endblock %}

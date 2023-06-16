@@ -1,0 +1,116 @@
+{%extends 'base.html'%}
+{%load static %}
+
+
+{%block content%}
+{%include 'header.html'%}
+
+<style>
+    body{
+        background:#113;
+    }
+</style>
+
+<div class="container">
+    <h3>Dear <span style="color: aqua;">{{client.first_name}} {{client.last_name}} ,</span> thank you for shopping with us!</h3>
+    <hr>
+    {%include 'messages.html'%}
+        <div class="row content">
+            <div class="col-sm-7 text-left">
+                {%if not carts %}
+                <h2 class="alert-info" style="padding: 15px;">Nothing in the cart!</h2>
+                {%else%}
+                <div class="row">
+                    <div class="col-sm-6">
+                    <img src="{%static 'images/momo.jpg'%}" width="40" class="col-sm-4">
+                    <div>
+                        <p style="color: white;">MTN Mobile Money</p>
+                        <p style="color: white; font-weight: 900;">+(250) 78-58-16-971</p>
+                    </div>
+                    </div>
+                <br>
+                <div class="col-sm-6">
+                    <img src="{%static 'images/bk.jpg'%}" width="40" class="col-sm-4">
+                    <div>
+                        <p style="color: white; font-weight: 900;">Bank Of Kigali</p>
+                        <p style="color: white; font-weight: 900;">123-1234-12345</p>
+                    </div>
+                </div>
+                </div>
+                <br>
+                <div class="alert alert-info">
+                <h4 >Do you want us to ship the products for you? You'll have to pay additional 1500Frw. We ship in Kigali City only!</h4>
+                <form method="post" class="form-horizontal">
+                    {%csrf_token%}
+                <h3 class="text-center"><input type="radio" name="ship" id="ship1" value="Yes" checked> <span style="color: green;">Yes</span> &nbsp; &nbsp;
+                <input  type="radio" name="ship" id="ship2" value="No"> <span style="color: brown;">No</span> </h3>
+                <div >
+                    </div>
+                    <br>
+                <h3 class="ship-container" style="color: black;">Shipping Address:</h3>
+                    <br>
+                    <br>
+                <div class="form-group ship-container ">
+                    <label class="control-label col-sm-2" for="address" style="color: black;">Shipping address:</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" value="_" name="address" placeholder="Enter shipping address in Kigali..." id="address" required>
+                    </div>
+                </div>
+                <div class="form-group ship-container ">
+                    <label class="control-label col-sm-2" for="email" style="color: black;">Phone Number:</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" value="{{client.phone}}" name="phone" required>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-success login-btn float-right mb-5" style="border:1px solid orange;">Place Order</button>
+                </form>
+                </div>
+                {% endif %}
+            </div>
+            <div class="col-sm-5 sidenav bg-dark" style="margin-top: -20px;">
+                <h3 class="alert">Order Summary:</h3>
+                <table class="table table-dark table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Item</th>
+                            <th scope="col">Item Name</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Amount</th>
+                        </tr>
+                        <tr>
+                    </thead>
+                    <tbody>
+                        {% for item in carts %}
+                        <th scope="row">{{forloop.counter}}</th>
+                        <td>
+                            <img src={{item.item.image.url}} alt={{item.item.name}} style="width:100%;" height=50>
+                        </td>
+                        <td>
+                            <h4>{{item.item.name }}</h4>
+                        </td>
+                        <td>
+                            <h4>{{ item.quantity}} </h4>
+                        </td>
+                        <td>
+                            <h4>{{ item.item.price}}</h4>
+                        </td>
+                        </tr>
+                        {% endfor %}
+                        <tr>
+                            <td>
+                                <h4>Total Amount</h4>
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td colspan="2">
+                                <h4 style="color: greenyellow; font-weight: 900;">{{total.amount__sum}} Frw</h4>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+</div>
+
+{%endblock%}

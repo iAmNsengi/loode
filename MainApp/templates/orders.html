@@ -1,0 +1,138 @@
+{%extends 'base.html'%}
+{%load static %}
+
+
+{%block content%}
+{%include 'header.html'%}
+<style>
+    body{
+        background:#113;
+    }
+</style>
+
+<br>
+<div class="container">
+    {% include 'messages.html'%}
+    <h3>My Orders:</h3>
+    {%if not orders %}
+    <h3 class="alert-info p-3">No orders yet!</h3>
+    {%endif%}
+    {% for item in orders %}
+    <div class="card mb-4" style="margin-top: 10px;">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-2" width=200>
+                    <img src={{item.product.image.url}} alt={{item.item.name}} style="width:100%;" height=150 class="img-thumbnai rounded float-left">
+                </div>
+                <h4 class=" col-sm-3" style="color: black;">{{item.product.name }}
+                    <p class="card-text h5" style="color: black;">{{item.product.price}}Frw</p>
+                    <p class="card-text h5" style="color: black; font-weight: 900;">Quantity Ordered:</p>
+                    <p class="card-text h5">{{item.quantity_ordered}} Shoe(s)</p>
+                    {% if not item.ship_address == "_" %}
+                    <p class="card-text h5">Ship to: <span style="font-weight: 300;">{{item.ship_address}}</span> </p>
+                    {%endif%}
+                </h4>
+                <div class="col-sm-2" id='item{{item.id}}' style="color: black;">
+                    <p class="card-text h5" style="color: black; font-weight: 900;">Shoe Size:</p>
+                    <p class="card-text h5" style="color: black;">{{item.shoe_size}}</p>
+                    <br>
+                    <p class="card-text h5" style="color: black; font-weight: 900;">Total Amount:</p>
+                    <p class="card-text h5" style="color: black;">{{item.amount}}
+                    {% if not item.ship_address == "_" %}
+                    + 1500 Frw
+                    {%endif%}
+                </p>
+    
+                </div>
+                <div class="col-sm-2">
+                    <p class="card-text h5" style="color: black; font-weight: 900;">Date Ordered:</p>
+                    <p class="card-text h5" style="color: black; font-weight: 300;">{{item.order_date}}</p>
+                    <p class="card-text h5" style="color: black; font-weight: 900;">Comment from Lode:</p>
+                    {%if item.order_status == 0 %}
+                    <p class="card-text h5" style="color: brown; font-weight: 300;">{{item.comment}}</p>
+                    {%else%}
+                    <p class="card-text h5" style="color: green; font-weight: 300;">{{item.comment}}</p>
+                    {%endif%}
+                    
+                </div>
+                <div class="col-sm-3">
+                    {%if item.order_status == 0 %}
+                    <p class="card-text h5" style="color: black;">Upload Screenshot of Payment</p>
+                    <br>
+                    <form action="/accounts/{{request.user}}/orders/{{item.id}}" method="post" enctype="multipart/form-data">
+                        {%csrf_token%}
+                        <input type="file" name="image" required>
+                        <br>
+                        <input type="submit" value="Send Proof" class="btn btn-success login-btn">
+                    </form>
+                    {%else%}
+                    <p class="card-text h5" style="color: black;">Payment proof received! Thanks for shopping with us!</p>
+                    <p class="card-text h6" style="color: black;">We'll contact u soon at &nbsp; <span style="color: red; font-weight: 900;">{{client.phone}}</span> or check your e-mail </p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    {%endfor%}
+    <!-- <h3>Complete Orders:</h3>
+    <table class="table table-dark table-sm table-striped">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Item</th>
+                <th scope="col">Item Name</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Amount</th>
+                <th scope="col">Date Ordered</th>
+                <th scope="col">Order Status</th>
+                <th scope="col">Comment from Lode</th>
+                <th scope="col">Proof Of Payment</th>
+
+            </tr>
+            <tr>
+        </thead>
+        <tbody>
+            {% for item in orders %}
+            <th>{{forloop.counter}}</th>
+            <td>
+                <img src={{item.product.image.url}} alt={{item.item.name}} style="width:100%;" height=50>
+            </td>
+            <td>
+                <h4>{{item.product.name }}</h4>
+            </td>
+            <td>
+                <h4>{{ item.quantity_ordered}} </h4>
+            </td>
+            <td>
+                <h4>{{ item.amount}} 
+                    
+                </h4>
+            </td>
+            <td> <h6>{{item.order_date}}</h6> </td>
+            <td>
+                <h4>{{item.order_status}}</h4>
+            </td>
+            <td>
+                <h5>{{item.comment}}</h5>
+            </td>
+            <td>
+                <form action="" method="post">
+                    {%csrf_token%}
+                    <input type="file" name="image">
+                </form>
+            </td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <td colspan="3">
+                    <h4>Total Amount</h4>
+                </td>
+                <td colspan="2">
+                    <h4 style="color: aqua; font-weight: 900;">{{total.amount__sum}} Frw</h4>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+-->
+</div>
+{%endblock%} 
