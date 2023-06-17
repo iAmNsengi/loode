@@ -54,18 +54,6 @@ class Category(models.Model):
     description = models.TextField()
     image = models.ImageField(upload_to="category/")
 
-    # def save(self, *args, **kwargs):
-    #     base_width = 360
-    #     image = Image.open(self.image)
-    #     width_percent = base_width / float(image.size[0])
-    #     hsize = int((float(image.size[1]) * float(width_percent)))
-    #     image = image.resize((base_width, hsize), PIL.Image.ANTIALIAS)
-    #     image.save(f"media/category/{self.image}.jpg")
-    #     with open(f"{self.image}.jpg", "rb") as fd:
-    #         img = fd.read()
-    #     self.image.save(f"media/category/{self.image}.jpg", ContentFile(img), save=True)
-    #     super(Category, self).save(*args, **kwargs)
-
     def __str__(self):
         return self.name
 
